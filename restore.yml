@@ -1,3 +1,6 @@
 ---
-- name: Execute the restore command in remote shell; stdout goes to the specified file on the remote
-  ansible.builtin.shell: restoredb.sh >> /tmp/backuplog.txt
+- name: Execute restore script and get result back.
+  hosts: all
+  tasks:
+     - name: Execute the script
+       command: sh /tmp/scripts/restoredb.sh
