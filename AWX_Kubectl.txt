@@ -2,6 +2,23 @@ AWX Kubectl
 
 systemctl status k3s.service
 
+
+[root@ansible ~]# kubectl get pods
+NAME                                               READY   STATUS    RESTARTS        AGE
+awx-postgres-0                                     1/1     Running   0               10h
+awx-59cf45d8d4-6rsgf                               4/4     Running   0               10h
+awx-operator-controller-manager-675865446d-zhvq7   2/2     Running   1 (4m49s ago)   10h
+
+kubectl scale deploy awx-59cf45d8d4-6rsgf --replicas=0
+kubectl scale deploy awx-postgres-0 --replicas=0
+kubectl scale deploy awx-operator-controller-manager-675865446d-zhvq7 --replicas=0
+
+kubectl scale deploy awx-operator-controller-manager-675865446d-zhvq7 --replicas=2
+kubectl scale deploy awx-postgres-0 --replicas=1
+kubectl scale deploy awx-59cf45d8d4-6rsgf --replicas=4
+
+
+
 [root@ansible ~]# kubectl version --short
 Client Version: v1.23.6+k3s1
 Server Version: v1.23.6+k3s1
