@@ -1,6 +1,16 @@
-AWX POC CLI
+AWX Kubectl
+
+systemctl status k3s.service
+
+[root@ansible ~]# kubectl version --short
+Client Version: v1.23.6+k3s1
+Server Version: v1.23.6+k3s1
 
 [root@ansible awx-operator]# export NAMESPACE=awx
+[root@ansible awx-operator]# kubectl create ns ${NAMESPACE}
+[root@ansible awx-operator]# kubectl config set-context --current --namespace=$NAMESPACE 
+Context "default" modified.
+
 [root@ansible awx-operator]# kubectl -n awx get secret awx-admin-password -o go-template='{{range $k,$v := .data}}{{printf "%s: " $k}}{{if not $v}}{{$v}}{{else}}{{$v | base64decode}}{{end}}{{"\n"}}{{end}}'
 password: bJIgwwHWlfuOEF0T3Wn9Bx0MabdNVTBZ
 
