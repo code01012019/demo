@@ -83,5 +83,38 @@ endpoints/awx-postgres                                      10.42.0.11:5432   10
 endpoints/awx-service                                       10.42.0.14:8052   10h
 
 
+How to Check AWX Container’s logs
+The awx-xxx-yyy pod will have four containers, namely:
 
+redis
+awx-web
+awx-task
+awx-ee
+As can be seen from below command output:
+
+# kubectl get deploy
+NAME                              READY   UP-TO-DATE   AVAILABLE   AGE
+awx-operator-controller-manager   1/1     1            1           9m58s
+awx                               1/1     1            1           7m47s
+
+# kubectl -n awx  logs deploy/awx
+error: a container name must be specified for pod awx-66596c8fcb-s28tw, choose one of: [redis awx-web awx-task awx-ee] or one of the init containers: [database-check init]
+Specify the name of the container for which you need to check its logs.
+
+kubectl -n awx  logs deploy/awx -c awx-task
+kubectl -n awx  logs deploy/awx -c redis
+kubectl -n awx  logs deploy/awx -c awx-web
+kubectl -n awx  logs deploy/awx -c awx-ee
+
+Accessing AWX Pod container shell
+Commands used to check the logs of each container.
+
+kubectl exec -ti deploy/awx  -c  awx-task -- /bin/bash
+kubectl exec -ti deploy/awx  -c  awx-ee -- /bin/bash
+kubectl exec -ti deploy/awx  -c  redis -- /bin/bash
+kubectl exec -ti deploy/awx  -c  awx-web -- /bin/bash
+To get out of the shell, just type exit
+
+bash-5.1$ exit
+exit
 
