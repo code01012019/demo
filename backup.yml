@@ -1,3 +1,6 @@
 ---
-- name: Execute the backup command in remote shell; stdout goes to the specified file on the remote
-  ansible.builtin.shell: backupdb.sh >> /tmp/backuplog.txt
+- name: Execute backup script and get result back.
+  hosts: all
+  tasks:
+     - name: Execute the script
+       command: sh /tmp/scripts/backupdb.sh
