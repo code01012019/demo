@@ -1,3 +1,3 @@
 ---
 - name: Execute the command in remote shell; stdout goes to the specified file on the remote
-  ansible.builtin.shell: /tmp/scripts/runme.sh >> /tmp/runme.log
+  ansible.builtin.shell: /tmp/scripts/runme.sh >> /tmp/scripts/runme.log
