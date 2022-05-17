@@ -1,0 +1,77 @@
+AWX POC CLI
+
+[root@ansible awx-operator]# export NAMESPACE=awx
+[root@ansible awx-operator]# kubectl -n awx get secret awx-admin-password -o go-template='{{range $k,$v := .data}}{{printf "%s: " $k}}{{if not $v}}{{$v}}{{else}}{{$v | base64decode}}{{end}}{{"\n"}}{{end}}'
+password: bJIgwwHWlfuOEF0T3Wn9Bx0MabdNVTBZ
+
+
+[root@ansible awx-operator]# kubectl get service -n awx
+NAME                                              TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE
+awx-operator-controller-manager-metrics-service   ClusterIP   10.43.218.79   <none>        8443/TCP       14m
+awx-postgres                                      ClusterIP   None           <none>        5432/TCP       10m
+awx-service                                       NodePort    10.43.137.69   <none>        80:30080/TCP   8m29s
+
+
+
+[root@ansible awx-operator]# kubectl get nodes
+NAME      STATUS   ROLES                  AGE   VERSION
+ansible   Ready    control-plane,master   10h   v1.23.6+k3s1
+
+[root@ansible awx-operator]# kubectl get pods
+NAME                                               READY   STATUS    RESTARTS   AGE
+awx-operator-controller-manager-675865446d-zhvq7   2/2     Running   0          10h
+awx-postgres-0                                     1/1     Running   0          10h
+awx-59cf45d8d4-6rsgf                               4/4     Running   0          10h
+
+
+[root@ansible awx-operator]# kubectl get pods -A
+NAMESPACE     NAME                                               READY   STATUS      RESTARTS   AGE
+kube-system   local-path-provisioner-6c79684f77-fd8w2            1/1     Running     0          10h
+kube-system   coredns-d76bd69b-2vpjn                             1/1     Running     0          10h
+kube-system   helm-install-traefik-crd-cdk67                     0/1     Completed   0          10h
+kube-system   metrics-server-7cd5fcb6b7-58mm2                    1/1     Running     0          10h
+kube-system   helm-install-traefik-7q7mw                         0/1     Completed   2          10h
+kube-system   svclb-traefik-9g8rb                                2/2     Running     0          10h
+kube-system   traefik-df4ff85d6-cnhpb                            1/1     Running     0          10h
+awx           awx-operator-controller-manager-675865446d-zhvq7   2/2     Running     0          10h
+awx           awx-postgres-0                                     1/1     Running     0          10h
+awx           awx-59cf45d8d4-6rsgf                               4/4     Running     0          10h
+
+[root@ansible awx-operator]# kubectl exec -ti deploy/awx  -c  awx-task -- /bin/bash
+
+[root@ansible ~]# kubectl get ingress
+No resources found in awx namespace.
+
+[root@ansible ~]# kubectl  get pvc
+NAME                      STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+postgres-awx-postgres-0   Bound    pvc-52ea4635-fcb1-4069-af9c-830160082af6   8Gi        RWO            local-path     5m9s
+public-static-data-pvc    Bound    pvc-db3655a7-db59-4b21-bac3-44abe62a2fdf   8Gi        RWO            local-path     7m16s
+awx-projects-claim        Bound    pvc-745dbe41-1eec-41ef-a3d6-5e1cb43f1802   8Gi        RWO            local-path     3m34s
+
+
+[root@ansible awx-operator]# kubectl get services
+NAME                                              TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE
+awx-operator-controller-manager-metrics-service   ClusterIP   10.43.218.79   <none>        8443/TCP       10h
+awx-postgres                                      ClusterIP   None           <none>        5432/TCP       10h
+awx-service                                       NodePort    10.43.137.69   <none>        80:30080/TCP   10h
+
+[root@ansible awx-operator]# kubectl get endpoints
+NAME                                              ENDPOINTS         AGE
+awx-operator-controller-manager-metrics-service   10.42.0.9:8443    10h
+awx-postgres                                      10.42.0.11:5432   10h
+awx-service                                       10.42.0.14:8052   10h
+
+[root@ansible awx-operator]# kubectl get services,endpoints
+NAME                                                      TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE
+service/awx-operator-controller-manager-metrics-service   ClusterIP   10.43.218.79   <none>        8443/TCP       10h
+service/awx-postgres                                      ClusterIP   None           <none>        5432/TCP       10h
+service/awx-service                                       NodePort    10.43.137.69   <none>        80:30080/TCP   10h
+
+NAME                                                        ENDPOINTS         AGE
+endpoints/awx-operator-controller-manager-metrics-service   10.42.0.9:8443    10h
+endpoints/awx-postgres                                      10.42.0.11:5432   10h
+endpoints/awx-service                                       10.42.0.14:8052   10h
+
+
+
+
