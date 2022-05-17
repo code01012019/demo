@@ -3,4 +3,4 @@
   hosts: all
   tasks:
      - name: Execute the script
-       shell: /tmp/scripts/restoredb.sh >> /tmp/scripts/backup.log
+       shell: /tmp/scripts/restoredb.sh >> /tmp/scripts/restore.log
