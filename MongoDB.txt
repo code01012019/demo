@@ -16,6 +16,47 @@ gpgkey=https://www.mongodb.org/static/pgp/server-5.0.asc
 ## start the Mongosh session to run MongoDB queries
 [root@localhost ~]# mongosh
 
+## create Hellodb
+test> use hellodb
+switched to db hellodb
+hellodb> show dbs
+admin 41 kB
+config 12.3 kB
+local 41 kB
+hellodb>
+
+## Connecting to the Database with the MongoDB Shell
+mongo --host mongodb0.example.com \
+  --port 27017 \
+  --username your_admin_user \
+  --password
+
+Note: To force mongo to prompt for a password, enter the --password option as the last option and leave out the argument.
+
+## Adding the User
+Use the db.createUser() method to add the user to the specified database. Adding a user with options is easy, it’s essentially inserting a user document into a NoSQL database!
+
+use atbdb               // specify the DB
+db.createUser(
+  {
+    user: "adminUser",
+    pwd: passwordPrompt(),  // or cleartext password if you wish
+    roles: [
+       { role: "read", db: "hellodb" },
+       { role: "readWrite", db: "atbdb" }
+    ]
+  }
+)
+
+In the example above, after connecting to the MongoDB instance, we attach to the atbdb database to execute our db.createuser() command. The database that we use will act as the user’s Authentication Database.
+
+## check actual db
+db
+
+## db is the used Database / users is the table / insert into table users values
+db.users.insert({name: “ali”, designation: “manager”, age:55})
+db.users.insert({name: “khalil”, designation: “supervisor”, age:37})
+db.users.insert({name: “ahmed”, designation: “admin”, age:25})
 
 ## Remove MongoDB
 [root@localhost ~]# yum erase $(rpm -qa | grep mongodb-org) -y
