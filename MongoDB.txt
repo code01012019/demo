@@ -25,11 +25,38 @@ config 12.3 kB
 local 41 kB
 hellodb>
 
+## By default, MongoDB does not have access control enabled, so there is no default user or password. Use the command line option --auth or the security.authorization configuration file setting to enable access control.
+
+The following are the steps that you can follow. First, open a terminal and start MongoDB Daemon.
+
+mongod --port 27017 --dbpath /data/db
+
+## Enter the mongo shell in a new terminal tab.
+mongo --port 27017
+
+## show users
+db.getUsers();
+
+## Create an admin user.
+use admin
+db.createUser(
+  {
+    user: "admindb",
+    pwd: "admindb",
+    roles: [ { role: "userAdminAnyDatabase", db: "admin" },
+             { role: "dbAdminAnyDatabase", db: "admin" },
+             { role: "readWriteAnyDatabase", db: "admin" }
+           ]
+  }
+)
+
 ## Connecting to the Database with the MongoDB Shell
 mongo --host mongodb0.example.com \
   --port 27017 \
   --username your_admin_user \
   --password
+
+mongo --host web1 --port 27017 --username root --password root
 
 Note: To force mongo to prompt for a password, enter the --password option as the last option and leave out the argument.
 
@@ -50,6 +77,18 @@ db.createUser(
 
 In the example above, after connecting to the MongoDB instance, we attach to the atbdb database to execute our db.createuser() command. The database that we use will act as the user’s Authentication Database.
 
+
+use atbdb              
+db.createUser(
+  {
+    user: "atbuser",
+    pwd: "atbuser",
+    roles: [
+       { role: "read", db: "hellodb" },
+       { role: "readWrite", db: "atbdb" }
+    ]
+  }
+)
 ## check actual db
 db
 
