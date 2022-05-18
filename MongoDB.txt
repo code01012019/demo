@@ -53,10 +53,18 @@ In the example above, after connecting to the MongoDB instance, we attach to the
 ## check actual db
 db
 
+## show dbs
+show dbs
+
+
 ## db is the used Database / users is the table / insert into table users values
 db.users.insert({name: “ali”, designation: “manager”, age:55})
 db.users.insert({name: “khalil”, designation: “supervisor”, age:37})
 db.users.insert({name: “ahmed”, designation: “admin”, age:25})
+
+## drop actual db
+db.dropDatabase()
+
 
 ## Remove MongoDB
 [root@localhost ~]# yum erase $(rpm -qa | grep mongodb-org) -y
