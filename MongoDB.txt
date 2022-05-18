@@ -1,0 +1,23 @@
+[root@localhost ~]# vi /etc/yum.repos.d/mongodb-org-5.0.repo
+[mongodb-org-5.0]
+name=MongoDB Repository
+baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/5.0/x86_64/
+gpgcheck=1
+enabled=1
+gpgkey=https://www.mongodb.org/static/pgp/server-5.0.asc
+
+
+[root@localhost ~]# yum install -y mongodb-org
+
+## start stop Service
+[root@localhost ~]# systemctl start mongod
+[root@localhost ~]# systemctl status mongod
+
+## start the Mongosh session to run MongoDB queries
+[root@localhost ~]# mongosh
+
+
+## Remove MongoDB
+[root@localhost ~]# yum erase $(rpm -qa | grep mongodb-org) -y
+[root@localhost ~]# rm -rf /var/log/mongodb
+[root@localhost ~]# rm -rf /var/lib/mongo
