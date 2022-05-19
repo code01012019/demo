@@ -34,6 +34,22 @@ MariaDB [(none)]> GRANT ALL PRIVILEGES ON *.* TO 'atbuser'@'%' IDENTIFIED BY 'at
 
 [root@devops1 ~]# mysql -uatbuser -patbpass
 
+create database atbdb;
+create database restoredb;
+
+DROP TABLE IF EXISTS `clients`;
+CREATE TABLE `clients` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `tel` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+
+LOCK TABLES `clients` WRITE;
+INSERT INTO `clients` VALUES (1,'khalil','123456789'),(2,'ahmed','456789123'),(3,'badis','789456123'),(4,'wassim','321654987'),(5,'karim','654987321'),(6,'adam','987654321');
+UNLOCK TABLES;
+
+
 CREATE TABLE clients  
 ( id INT NOT NULL AUTO_INCREMENT,  
   name VARCHAR(100) NOT NULL,  
