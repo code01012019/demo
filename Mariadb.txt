@@ -1,0 +1,34 @@
+mysql
+
+mysql -h 166.78.144.191 -u username -ppassword database_name
+
+MariaDB [(none)]> create database atbdb;
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| atbdb              |
+| information_schema |
+| mysql              |
+| performance_schema |
++--------------------+
+4 rows in set (0.002 sec)
+
+MariaDB [(none)]> create user 'atbuser' identified by 'atbpass';
+Query OK, 0 rows affected (0.001 sec)
+
+MariaDB [(none)]> create user 'atbuser'@'localhost' identified by 'atbpass';
+Query OK, 0 rows affected (0.001 sec)
+
+MariaDB [(none)]> create user 'atbuser'@'127.0.0.1' identified by 'atbpass';
+Query OK, 0 rows affected (0.000 sec)
+
+MariaDB [(none)]> create user 'atbuser'@'%' identified by 'atbpass';
+ERROR 1396 (HY000): Operation CREATE USER failed for 'atbuser'@'%'
+MariaDB [(none)]> 
+MariaDB [(none)]> 
+MariaDB [(none)]> GRANT ALL PRIVILEGES ON database.* TO 'atbuser'@'%' IDENTIFIED BY 'atbpass';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'database.* TO 'atbuser'@'%' IDENTIFIED BY 'atbpass'' at line 1
+MariaDB [(none)]> GRANT ALL PRIVILEGES ON *.* TO 'atbuser'@'%' IDENTIFIED BY 'atbpass';
