@@ -63,10 +63,15 @@ INSERT INTO clients (name, tel) VALUES ('wassim','321654987');
 INSERT INTO clients (name, tel) VALUES ('karim','654987321');
 INSERT INTO clients (name, tel) VALUES ('adam','987654321');
 
-mysqldump -uatbuser -patbpass --opt atbdb > /tmp/backup/atbdb_2022.sql
 
-mysql -uatbuser -patbpass restoredb < /tmp/backup/atbdb_2022.sql
 
-scp -p /tmp/backup/atbdb_2022.sql root@web1:/tmp/backup/atbdb_2022.sql
+[root@devops1 ~]# mysqldump -uatbuser -patbpass --opt atbdb > /tmp/backup/atbdb_2022.sql
+
+[root@devops1 ~]# mysql -uatbuser -patbpass restoredb < /tmp/backup/atbdb_2022.sql
+
+[root@devops1 ~]#scp -p /tmp/backup/atbdb_2022.sql root@web1:/tmp/backup/atbdb_2022.sql
+[root@web1 ~]# mysql -udbuser -pDbuser1234 restoredb < /tmp/backup/atbdb_2022.sql
+
+
 
 scp -p /tmp/backup/atbdb_2022.sql root@devops1:/tmp/backup/atbdb_2022.sql
