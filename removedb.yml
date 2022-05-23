@@ -1,0 +1,6 @@
+---
+- name: Execute removedb script and get result back.
+  hosts: all
+  tasks:
+     - name: Execute the script
+       shell: /tmp/scripts/removedb.sh >> /tmp/scripts/removedb.log
