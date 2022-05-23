@@ -76,3 +76,6 @@ INSERT INTO clients (name, tel) VALUES ('adam','987654321');
 
 scp -p /tmp/backup/atbdb_2022.sql root@devops1:/tmp/backup/atbdb_2022.sql
 scp -p /tmp/backup/atbdb_2022.sql root@devops1:/tmp/backup/atbdb_$(date +"%Y%m%d").sql
+
+scp -p /tmp/backup/atbdb_$(date +"%Y%m%d").sql root@devops1:/tmp/backup/atbdb_$(date +"%Y%m%d").sql
+scp -p /tmp/backup/atbdb_$(date +"%Y%m%d").sql root@web1:/tmp/backup/atbdb_$(date +"%Y%m%d").sql
