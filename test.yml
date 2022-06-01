@@ -1,1 +1,16 @@
 ---
+  - hosts: webservers
+    user: ansible
+    become: True
+    become_user: root
+    tasks:
+      - name: Install httpd package
+        yum:
+          name: httpd
+          state: present
+      - name: Write the apache config file
+        template: src=/srv/httpd.j2 dest=/etc/httpd.conf
+      - name: Check httpd service is running
+        service:
+          name: httpd
+          state: started
