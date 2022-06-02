@@ -1,18 +1,18 @@
 ---
   - hosts: awx
     tasks:
-      - name: Stop service httpd, if started
+      - name: Stop service httpd if started
         service:
           name: httpd
           state: stopped
-        debug:
-          msg: 'Apache httpd is stopped'
+        ansible.builtin.debug:
+          msg: Apache httpd is stopped
       - name: Deinstall httpd package
         yum:
           name: httpd
           state: absent
-        debug:
-          msg: 'Apache httpd is removed'
+        ansible.builtin.debug:
+          msg: Apache httpd is removed
       - name: Print message
         ansible.builtin.debug:
           msg: install package done! 
