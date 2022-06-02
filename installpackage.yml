@@ -9,3 +9,6 @@
         service:
           name: httpd
           state: started
+      - name: Print message
+        ansible.builtin.debug:
+          msg: install package done!    
