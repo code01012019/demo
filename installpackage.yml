@@ -1,0 +1,11 @@
+---
+  - hosts: TEST
+    tasks:
+      - name: Install httpd package
+        yum:
+          name: httpd
+          state: present
+      - name: Check httpd service is running
+        service:
+          name: httpd
+          state: started
