@@ -1,4 +1,4 @@
 ---
 - hosts: awx
   tasks:
-  - action: ping
+    - action: ping
