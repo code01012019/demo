@@ -1,0 +1,5 @@
+---
+- hosts: awx
+  tasks:
+  - ping:
+      crash: data
