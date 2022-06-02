@@ -13,4 +13,7 @@
           state: absent
           debug:
             msg: 'Apache httpd is removed'
+      - name: Print message
+        ansible.builtin.debug:
+          msg: install package done! 
       
