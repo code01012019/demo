@@ -1,0 +1,16 @@
+---
+  - hosts: awx
+    tasks:
+      - name: Stop service httpd, if started
+        service:
+          name: httpd
+          state: stopped
+          debug:
+            msg: 'Apache httpd is stopped'
+      - name: Deinstall httpd package
+        yum:
+          name: httpd
+          state: absent
+          debug:
+            msg: 'Apache httpd is removed'
+      

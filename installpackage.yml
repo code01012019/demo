@@ -5,7 +5,11 @@
         yum:
           name: httpd
           state: present
+          debug:
+            msg: 'Apache httpd is installed'
       - name: Check httpd service is running
         service:
           name: httpd
           state: started
+          debug:
+            msg: 'Apache httpd is started'
