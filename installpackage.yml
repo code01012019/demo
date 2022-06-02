@@ -1,5 +1,5 @@
 ---
-  - hosts: TEST
+  - hosts: awx
     tasks:
       - name: Install httpd package
         yum:
