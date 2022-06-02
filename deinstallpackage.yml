@@ -5,15 +5,11 @@
         service:
           name: httpd
           state: stopped
-        ansible.builtin.debug:
-          msg: Apache httpd is stopped
       - name: Deinstall httpd package
         yum:
           name: httpd
           state: absent
-        ansible.builtin.debug:
-          msg: Apache httpd is removed
       - name: Print message
         ansible.builtin.debug:
-          msg: install package done! 
+          msg: Deinstall package done! 
       
