@@ -1,6 +1,6 @@
----
+--- 
 - name: Execute remote copy script and get result back.
   hosts: all
   tasks:
      - name: Execute the script
-       shell: /tmp/scripts/remotescp.sh >> /tmp/scripts/remotescp.log
+       shell: /home/scripts/remotescp.sh >> /home/scripts/remotescp.log

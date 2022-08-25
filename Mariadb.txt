@@ -65,17 +65,17 @@ INSERT INTO clients (name, tel) VALUES ('adam','987654321');
 
 
 
-[root@devops1 ~]# mysqldump -uatbuser -patbpass --opt atbdb > /tmp/backup/atbdb_2022.sql
-[root@devops1 ~]# mysqldump -uatbuser -patbpass --opt atbdb > /tmp/backup/atbdb_$(date +"%Y%m%d").sql
+[root@devops1 ~]# mysqldump -uatbuser -patbpass --opt atbdb > /home/backup/atbdb_2022.sql
+[root@devops1 ~]# mysqldump -uatbuser -patbpass --opt atbdb > /home/backup/atbdb_$(date +"%Y%m%d").sql
 
-[root@devops1 ~]# mysql -uatbuser -patbpass restoredb < /tmp/backup/atbdb_$(date +"%Y%m%d").sql
+[root@devops1 ~]# mysql -uatbuser -patbpass restoredb < /home/backup/atbdb_$(date +"%Y%m%d").sql
 
-[root@devops1 ~]#scp -p /tmp/backup/atbdb_2022.sql root@web1:/tmp/backup/atbdb_$(date +"%Y%m%d").sql
-[root@web1 ~]# mysql -udbuser -pDbuser1234 restoredb < /tmp/backup/atbdb_$(date +"%Y%m%d").sql
+[root@devops1 ~]#scp -p /home/backup/atbdb_2022.sql root@web1:/home/backup/atbdb_$(date +"%Y%m%d").sql
+[root@web1 ~]# mysql -udbuser -pDbuser1234 restoredb < /home/backup/atbdb_$(date +"%Y%m%d").sql
 
 
-scp -p /tmp/backup/atbdb_2022.sql root@devops1:/tmp/backup/atbdb_2022.sql
-scp -p /tmp/backup/atbdb_2022.sql root@devops1:/tmp/backup/atbdb_$(date +"%Y%m%d").sql
+scp -p /home/backup/atbdb_2022.sql root@devops1:/home/backup/atbdb_2022.sql
+scp -p /home/backup/atbdb_2022.sql root@devops1:/home/backup/atbdb_$(date +"%Y%m%d").sql
 
-scp -p /tmp/backup/atbdb_$(date +"%Y%m%d").sql root@devops1:/tmp/backup/atbdb_$(date +"%Y%m%d").sql
-scp -p /tmp/backup/atbdb_$(date +"%Y%m%d").sql root@web1:/tmp/backup/atbdb_$(date +"%Y%m%d").sql
+scp -p /home/backup/atbdb_$(date +"%Y%m%d").sql root@devops1:/home/backup/atbdb_$(date +"%Y%m%d").sql
+scp -p /home/backup/atbdb_$(date +"%Y%m%d").sql root@web1:/home/backup/atbdb_$(date +"%Y%m%d").sql

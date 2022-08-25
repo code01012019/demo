@@ -4,7 +4,7 @@
 echo "###"
 date
 echo "Begin Backup..."
-mysqldump -uatbuser -patbpass --opt atbdb > /tmp/backup/atbdb_$(date +"%Y%m%d").sql
+mysqldump -uatbuser -patbpass --opt atbdb > /home/backup/atbdb_$(date +"%Y%m%d").sql
 sleep 5
 echo "End Backup"
 #!/bin/sh
@@ -12,7 +12,7 @@ echo "End Backup"
 echo "###"
 date
 echo "Begin remote copy..."
-scp -p /tmp/backup/atbdb_$(date +"%Y%m%d").sql root@web1:/tmp/backup/atbdb_$(date +"%Y%m%d").sql
+scp -p /home/backup/atbdb_$(date +"%Y%m%d").sql root@web1:/home/backup/atbdb_$(date +"%Y%m%d").sql
 sleep 5
 echo "End remote copy"
 #!/bin/sh
@@ -20,7 +20,7 @@ echo "End remote copy"
 echo "###"
 date
 echo "Begin Remove..."
-mysql -uatbuser -patbpass restoredb < /tmp/backup/removedb.sql
+mysql -uatbuser -patbpass restoredb < /home/backup/removedb.sql
 sleep 5
 echo "End Remove"
 #!/bin/sh
@@ -28,7 +28,7 @@ echo "End Remove"
 echo "###"
 date
 echo "Begin Restore..."
-mysql -uatbuser -patbpass restoredb < /tmp/backup/atbdb_$(date +"%Y%m%d").sql
+mysql -uatbuser -patbpass restoredb < /home/backup/atbdb_$(date +"%Y%m%d").sql
 sleep 5
 echo "End Restore"
 #!/bin/sh
