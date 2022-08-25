@@ -1,4 +1,4 @@
----
+--- 
   - hosts: awx
     tasks:
       - name: Install httpd package

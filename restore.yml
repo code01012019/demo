@@ -1,6 +1,6 @@
----
+--- 
 - name: Execute restore script and get result back.
   hosts: all
   tasks:
      - name: Execute the script
-       shell: /tmp/scripts/restoredb.sh >> /tmp/scripts/restore.log
+       shell: /home/scripts/restoredb.sh >> /home/scripts/restore.log

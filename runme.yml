@@ -3,4 +3,4 @@
   hosts: all
   tasks:
      - name: Execute the script
-       ansible.builtin.shell: /tmp/scripts/runme.sh >> /tmp/scripts/runme.log
+       ansible.builtin.shell: /home/scripts/runme.sh >> /home/scripts/runme.log

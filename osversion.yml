@@ -1,4 +1,4 @@
----
+--- 
 - hosts: awx
   gather_facts: yes
   tasks:
