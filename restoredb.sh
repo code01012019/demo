@@ -1,5 +1,7 @@
 #!/bin/sh
 
+echo "### restoredb"
+date
 echo "Begin Restore..."
-sleep 5
+mysql -udbuser -pDbuser1234 restoredb < /backup/atbdb_$(date +"%Y%m%d").sql
 echo "End Restore"
