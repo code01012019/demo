@@ -1,5 +1,5 @@
 --- 
-  - hosts: web1
+  - hosts: all
     tasks:
       - name: Install httpd package
         yum:
