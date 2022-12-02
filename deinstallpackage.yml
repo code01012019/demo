@@ -1,5 +1,5 @@
 ---
-  - hosts: all
+  - hosts: 
     tasks:
       - name: Stop service httpd if started
         service:
