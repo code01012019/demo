@@ -1,4 +1,4 @@
 --- 
-- hosts: awx
+- hosts: web1
   tasks:
     - action: ping
