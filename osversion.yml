@@ -1,5 +1,5 @@
 --- 
-- hosts: awx
+- hosts: web1
   gather_facts: yes
   tasks:
   - name: Distribution
